@@ -50,8 +50,8 @@ class Tests {
     @Tag("Trivial")
     fun seconds() {
         assertEquals(30035, seconds(8, 20, 35))
-        assertEquals(86400, seconds(24, 0, 0))
-        assertEquals(13, seconds(0, 0, 13))
+        assertEquals(3600, seconds(1, 0, 0))
+        assertEquals(7266, seconds(2, 1, 6))
     }
 
     @Test
@@ -59,6 +59,7 @@ class Tests {
     fun lengthInMeters() {
         assertEquals(18.98, lengthInMeters(8, 2, 11), 1e-2)
         assertEquals(2.13, lengthInMeters(1, 0, 0), 1e-2)
+        assertEquals(0.7112, lengthInMeters(0, 1, 0), 1e-2)
     }
 
     @Test

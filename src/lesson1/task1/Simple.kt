@@ -49,7 +49,11 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
  */
 fun main(args: Array<String>) {
     val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
+    val sumSec = seconds(1,1,6)
+    val sajArVerInMet = lengthInMeters(1,0,0)
     println("Root product: $x1x2")
+    println("Sum of seconds: $sumSec")
+    println("Lenght in metems: $sajArVerInMet")
 }
 
 /**
@@ -58,7 +62,13 @@ fun main(args: Array<String>) {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int {
+    val mits = 60 // секунд в минуте
+    val hrs: Int = mits * 60 // минут в часе
+    val secInMin: Int = minutes * mits // секунд в минутах
+    val secInHrs: Int = hours * hrs // секунд в часах
+    return seconds + secInMin + secInHrs // сумма секунд в часх, минутах и секундах
+}
 
 /**
  * Тривиальная
@@ -67,7 +77,16 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = TODO()
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
+    val ver = 4.445 // 1 вершок в см
+    val ar: Double = ver * 48 / 3 // 1 аршин в вершках
+    val saj: Double = ar * 3 // 1 сажень в аршинах
+    val smInVersh: Double = ver * vershoks // сантиметров в вершках
+    val smInArsh: Double = arshins * ar // сантиметров в аршине
+    val smInSag: Double = sagenes * saj // сантиметров в саженце
+    val lenghtInSm: Double = smInVersh + smInArsh + smInSag //сантиметров всего
+    return lenghtInSm / 100 //длина в метрах
+}
 
 /**
  * Тривиальная
