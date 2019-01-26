@@ -51,9 +51,11 @@ fun main(args: Array<String>) {
     val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
     val sumSec = seconds(1,1,6)
     val sajArVerInMet = lengthInMeters(1,0,0)
+    val grInRad = angleInRadian(180,0,0)
     println("Root product: $x1x2")
     println("Sum of seconds: $sumSec")
     println("Lenght in metems: $sajArVerInMet")
+    println ("Angle in radians: $grInRad")
 }
 
 /**
@@ -94,7 +96,15 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(deg: Int, min: Int, sec: Int): Double = TODO()
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
+    val gr = PI / 180 // градус в радианах
+    val mt: Double = gr / 60 // минуты в градусах
+    val se: Double = mt / 60 // секунды в минутах
+    val radInGr: Double = gr * deg // радианов в градусах
+    val radInMt: Double = mt * min // радианов в минутах
+    val radInSe: Double = se * sec // радианов в секундах
+    return radInGr + radInMt + radInSe // радианов всего
+}
 
 /**
  * Тривиальная
