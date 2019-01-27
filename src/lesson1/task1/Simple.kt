@@ -49,13 +49,12 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
  */
 fun main(args: Array<String>) {
     val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
-    val sumSec = seconds(1,1,6)
-    val sajArVerInMet = lengthInMeters(1,0,0)
-    val grInRad = angleInRadian(180,0,0)
     println("Root product: $x1x2")
-    println("Sum of seconds: $sumSec")
-    println("Lenght in metems: $sajArVerInMet")
-    println ("Angle in radians: $grInRad")
+    println("Sum in seconds: ${seconds(1,1,6)}")
+    println("Length in metems: ${lengthInMeters(1,0,0)}")
+    println("Angle in radians: ${angleInRadian(180,0,0)}")
+    println("Length of track: ${trackLength(0.0,0.0,2.0,2.0)}")
+    println("Third digit from the end: ${thirdDigit(45237)}")
 }
 
 /**
@@ -86,8 +85,8 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
     val smInVersh: Double = ver * vershoks // сантиметров в вершках
     val smInArsh: Double = arshins * ar // сантиметров в аршине
     val smInSag: Double = sagenes * saj // сантиметров в саженце
-    val lenghtInSm: Double = smInVersh + smInArsh + smInSag //сантиметров всего
-    return lenghtInSm / 100 //длина в метрах
+    val lengthInSm: Double = smInVersh + smInArsh + smInSag //сантиметров всего
+    return lengthInSm / 100 //длина в метрах
 }
 
 /**
@@ -112,7 +111,11 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
+    val xKat = x2 - x1 // изменение координаты по X
+    val yKat = y2 - y1 // изменение координаты по Y
+    return sqrt((xKat * xKat)+(yKat* yKat)) // гипотенуза
+}
 
 /**
  * Простая
@@ -120,7 +123,11 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Пользователь задает целое число, большее 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int = TODO()
+fun thirdDigit(number: Int): Int {
+    val cuter: Int = number / 100 // обрезаем до нужной цифры с конца
+    val grandCuter: Int = number / 1000 // обрезаем до старшего порядка
+    return cuter - (grandCuter * 10)
+}
 
 /**
  * Простая
