@@ -55,6 +55,9 @@ fun main(args: Array<String>) {
     println("Angle in radians: ${angleInRadian(180,0,0)}")
     println("Length of track: ${trackLength(0.0,0.0,2.0,2.0)}")
     println("Third digit from the end: ${thirdDigit(45237)}")
+    println("Minutes of travel: ${travelMinutes(12,0,12,30)}")
+    println("Account in three years: ${accountInThreeYears(100,10)}")
+    println("Number reverse: ${numberRevert(159)}")
 }
 
 /**
@@ -126,7 +129,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
 fun thirdDigit(number: Int): Int {
     val cuter: Int = number / 100 // обрезаем до нужной цифры с конца
     val grandCuter: Int = number / 1000 // обрезаем до старшего порядка
-    return cuter - (grandCuter * 10)
+    return cuter - (grandCuter * 10) //разница со старшим порядком
 }
 
 /**
@@ -136,7 +139,13 @@ fun thirdDigit(number: Int): Int {
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = TODO()
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
+    val depHourInMin = hoursDepart * 60 // час отправления в минутах
+    val arrHourInMin = hoursArrive * 60 // час прибытия в минутах
+    val sumDepMin = depHourInMin + minutesDepart // кол-во минут до прибытия
+    val sumArrMin = arrHourInMin + minutesArrive // кол-во минут до отбытия
+    return sumArrMin - sumDepMin // разница минут
+}
 
 /**
  * Простая
@@ -145,7 +154,15 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double {
+    var y = 1 // начальное значение счетчика годов
+    var sumWithPer = initial + 0.0 // начальная сумма в Double
+    while (y <= 3) { // цикл до 3-х
+        sumWithPer = sumWithPer * percent / 100 + sumWithPer
+        y ++
+    }
+    return sumWithPer //сумма после 3-х начислений процентов
+}
 
 /**
  * Простая
@@ -153,4 +170,9 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): Int {
+    val dig3 = number - ((number / 10) * 10) // третья цифра (единицы)
+    val dig2 = (number / 10) - ((number / 100) * 10) // вторая цифра (десятки)
+    val dig1 = number / 100 // первая цифра (сотни)
+    return dig3 * 100 + dig2 * 10 + dig1 //наоборот
+}
