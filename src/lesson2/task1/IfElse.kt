@@ -5,6 +5,11 @@ import lesson1.task1.discriminant
 import kotlin.math.max
 import kotlin.math.sqrt
 
+fun main(args: Array<String>) {
+    val aN = 124
+    println("Окончание ${ageDescription(aN)}")
+}
+
 /**
  * Пример
  *
@@ -62,7 +67,25 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun endName(x: Int): String = when (x) {
+    !in 1..199 -> "Вне допустимого интервала"
+    1 -> "год"
+    in 2..4 -> "года"
+    in 5..9 -> "лет"
+    in 11..19 -> "лет"
+    0 -> "лет"
+    else -> "Вне допустимого интервала"
+}
+
+fun ageDescription(age: Int): String {
+    val last2Dig: Int = (age + 100) - (age + 100) / 100 * 100
+    val last1Dig: Int = (age + 10) - (age + 10) / 10 * 10
+    return when (last2Dig) {
+        in 1..19 -> "$age ${endName(last2Dig)}"
+        in 20..99 -> "$age ${endName(last1Dig)}"
+        else -> "Что-то пошло не так"
+    }
+}
 
 /**
  * Простая
