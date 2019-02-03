@@ -8,6 +8,7 @@ import kotlin.math.sqrt
 fun main(args: Array<String>) {
     val aN = 124
     println("Окончание ${ageDescription(aN)}")
+    println("Время на половину пути: ${timeForHalfWay(3.0,0.0,1.0,6.0,2.0,5.0)}")
 }
 
 /**
@@ -96,7 +97,14 @@ fun ageDescription(age: Int): String {
  */
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
-                   t3: Double, v3: Double): Double = TODO()
+                   t3: Double, v3: Double): Double {
+    val halfLenght: Double = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
+    return if (halfLenght > (t1 * v1) && halfLenght < ((t1 * v1) + (t2 * v2))) {
+        t1 + ((halfLenght - (t1 * v1)) / v2)
+    } else if (halfLenght > ((t1 * v1) + (t2 * v2))) {
+        t1 + t2 + ((halfLenght - ((t1 * v1) + (t2 * v2))) / v3)
+    } else {halfLenght / v1}
+}
 
 /**
  * Простая
@@ -109,7 +117,15 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = TODO()
+                       rookX2: Int, rookY2: Int): Int {
+    val hit1: Boolean = kingX == rookX1 || kingY == rookY1
+    val hit2: Boolean = kingX == rookX2 || kingY == rookY2
+    return if (hit1 == true && hit2 == true) 3 else {
+        if (hit1 == false && hit2 == true) 2 else {
+            if (hit1 == true && hit2 == false) 1 else 0
+        }
+    }
+}
 
 /**
  * Простая
