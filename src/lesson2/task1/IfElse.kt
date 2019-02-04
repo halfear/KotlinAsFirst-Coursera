@@ -2,8 +2,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
-import kotlin.math.max
-import kotlin.math.sqrt
+import kotlin.math.*
 
 fun main(args: Array<String>) {
     val aN = 124
@@ -103,7 +102,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
         t1 + ((halfLenght - (t1 * v1)) / v2)
     } else if (halfLenght > ((t1 * v1) + (t2 * v2))) {
         t1 + t2 + ((halfLenght - ((t1 * v1) + (t2 * v2))) / v3)
-    } else {halfLenght / v1}
+    } else halfLenght / v1
 }
 
 /**
@@ -139,7 +138,15 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = TODO()
+                          bishopX: Int, bishopY: Int): Int {
+    val hitR: Boolean = kingX == rookX || kingY == rookY
+    val hitB: Boolean = abs(kingX - bishopX) == abs(kingY - bishopY)
+    return if (hitR == true && hitB == true) 3 else {
+        if (hitR == false && hitB == true) 2 else {
+            if (hitR == true && hitB == false) 1 else 0
+        }
+    }
+}
 
 /**
  * Простая
