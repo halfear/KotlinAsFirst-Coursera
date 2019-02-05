@@ -2,6 +2,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.*
 
 fun main(args: Array<String>) {
@@ -156,7 +157,37 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+
+    return if (a > b && a > c) {
+        if (a >= b + c) -1 else {
+            val matGip: Double = sqrt(sqr(b) + sqr(c))
+            when {
+                a > matGip -> 2
+                a < matGip -> 0
+                else -> 1
+            }
+        }
+    } else if (b > a && b > c) {
+        if (b >= a + c) -1 else {
+            val matGip: Double = sqrt(sqr(a) + sqr(c))
+            when {
+                b > matGip -> 2
+                b < matGip -> 0
+                else -> 1
+            }
+        }
+    } else if (c > a && c >b) {
+        if (c >= a + b) -1 else {
+            val matGip: Double = sqrt(sqr(a) + sqr(b))
+            when {
+                c > matGip -> 2
+                c < matGip -> 0
+                else -> 1
+            }
+        }
+    } else 0
+}
 
 /**
  * Средняя
