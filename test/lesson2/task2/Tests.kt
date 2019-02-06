@@ -20,6 +20,8 @@ class Tests {
         assertTrue(isNumberHappy(1533))
         assertTrue(isNumberHappy(9009))
         assertFalse(isNumberHappy(3644))
+        assertTrue(isNumberHappy(3544))
+        assertTrue(isNumberHappy(9586))
     }
 
     @Test

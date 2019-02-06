@@ -3,6 +3,10 @@ package lesson2.task2
 
 import lesson1.task1.sqr
 
+fun main(args: Array<String>) {
+    println("${3544 % 10}")
+}
+
 /**
  * Пример
  *
@@ -17,7 +21,13 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean {
+    val fourthDig: Int = number % 10
+    val thirdDig: Int = (number % 100) / 10
+    val secondDig: Int = (number % 1000) / 100
+    val firstDig: Int = (number % 10000) / 1000
+    return (firstDig + secondDig) == (thirdDig + fourthDig)
+}
 
 /**
  * Простая
