@@ -73,8 +73,7 @@ fun endName(x: Int): String = when (x) {
     !in 1..199 -> "Вне допустимого интервала"
     1 -> "год"
     in 2..4 -> "года"
-    in 5..9 -> "лет"
-    in 11..19 -> "лет"
+    in 5..19 -> "лет"
     0 -> "лет"
     else -> "Вне допустимого интервала"
 }
@@ -100,7 +99,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
                    t3: Double, v3: Double): Double {
     val halfLenght: Double = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
-    return if (halfLenght > (t1 * v1) && halfLenght < ((t1 * v1) + (t2 * v2))) {
+    return if (halfLenght > (t1 * v1) && halfLenght <= ((t1 * v1) + (t2 * v2))) {
         t1 + ((halfLenght - (t1 * v1)) / v2)
     } else if (halfLenght > ((t1 * v1) + (t2 * v2))) {
         t1 + t2 + ((halfLenght - ((t1 * v1) + (t2 * v2))) / v3)
