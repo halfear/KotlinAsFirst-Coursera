@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
     val aN = 124
     println("Окончание ${ageDescription(aN)}")
     println("Время на половину пути: ${timeForHalfWay(3.0,0.0,1.0,6.0,2.0,5.0)}")
+    println("Длина пересечения: ${segmentLength(3,4,4,5)}")
 }
 
 /**
@@ -197,4 +198,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    return if (a > b || c > d) -1 else {
+        if (c > b || d < a) -1 else {
+            when {
+                b >= c && b <= d && a <= c -> b - c
+                d >= a && d <= b && c <= a -> d - a
+                a >= c && a <= d && b >= c && b <= d -> b - a
+                else -> d - c
+            }
+        }
+    }
+}
