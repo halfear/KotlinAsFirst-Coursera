@@ -70,7 +70,6 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun endName(x: Int): String = when (x) {
-    !in 1..199 -> "Вне допустимого интервала"
     1 -> "год"
     in 2..4 -> "года"
     in 5..19 -> "лет"
@@ -79,12 +78,10 @@ fun endName(x: Int): String = when (x) {
 }
 
 fun ageDescription(age: Int): String {
-    val last2Dig: Int = (age + 100) - (age + 100) / 100 * 100
-    val last1Dig: Int = (age + 10) - (age + 10) / 10 * 10
-    return when (last2Dig) {
-        in 1..19 -> "$age ${endName(last2Dig)}"
-        in 20..99 -> "$age ${endName(last1Dig)}"
-        else -> "Что-то пошло не так"
+    val last2Dig: Int = age % 100
+    val last1Dig: Int = age % 10
+    return if (age <= 0 || age >= 200) "Возраст меньше 0 или больше 200 лет" else {
+        if (last2Dig in 0..19) "$age ${endName(last2Dig)}" else "$age ${endName(last1Dig)}"
     }
 }
 
