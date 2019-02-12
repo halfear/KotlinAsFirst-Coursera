@@ -85,7 +85,7 @@ class Tests {
         assertEquals(1134903170, fib(45))
         assertEquals(1836311903, fib(46))
         // Just to calculate it
-        fib(50)
+        assertEquals(12586269025, fib(50))
     }
 
     @Test
@@ -100,6 +100,7 @@ class Tests {
         assertEquals(2089830349, lcm(23579, 88631))
         assertEquals(2022222222, lcm(2, 1011111111))
         assertEquals(2022222222, lcm(1011111111, 2))
+        assertEquals(3, lcm(3, 3))
     }
 
     @Test
@@ -152,6 +153,7 @@ class Tests {
         assertFalse(squareBetweenExists(999, 1001))
         assertTrue(squareBetweenExists(152374337, 152423715))
         assertFalse(squareBetweenExists(2147395601, Int.MAX_VALUE))
+        assertFalse(squareBetweenExists(26, 34))
     }
 
     @Test
