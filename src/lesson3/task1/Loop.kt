@@ -9,7 +9,7 @@ import kotlin.math.sqrt
 import kotlin.math.PI
 
 fun main(args: Array<String>) {
-    sin(100 * PI, 1e-5)
+    sin(30 * PI, 1e-5)
 }
 
 /**
@@ -243,26 +243,36 @@ fun collatzSteps(x: Int): Int {
  */
 
 fun sin(x: Double, eps: Double): Double {
-    // для знака "-" у каждого второго члена
     var minus = 1.0
-    // очередной член
     var curMem: Double
-    // сумма членов
     var sumMem = 0.0
-    // для x > 2PI
     var xX = x
-    while (xX > 2 * PI) xX -= 2 * PI
-    // иначе вычисляем очеердной член и сумму
-    for (deG in 1..(1/eps).toInt() step 2) {
-        curMem = xX.pow(deG) / factorial(deG) * minus
-        sumMem += curMem
-        minus *= -1
-        println("$deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
-        if (abs(curMem) < eps) break
+    when {
+        xX % PI == 0.0 -> {
+            println("$xX кратно PI, sin(x)=0.0")
+            return 0.0
+        }
+        (xX % (PI / 2) == 0.0) && (xX % (3 * PI / 2) != 0.0) -> {
+            println("$xX кратно PI/2, sin(x)=1.0")
+            return 1.0
+        }
+        xX % (3 * PI / 2) == 0.0 -> {
+            println("$xX кратно 3/2PI, sin(x)=-1.0")
+            return -1.0
+        }
+        else -> {
+            while (xX > 2 * PI) xX -= 2 * PI
+            for (deG in 1..(1 / eps).toInt() step 2) {
+                curMem = xX.pow(deG) / factorial(deG) * minus
+                sumMem += curMem
+                minus *= -1
+                println("Не на осях: $xX, $deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
+                if (abs(curMem) < eps) break
+            }
+            return sumMem
+        }
     }
-    return sumMem
 }
-
 
 
 /**
