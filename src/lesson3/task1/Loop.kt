@@ -3,10 +3,13 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import java.lang.Math.*
+import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.math.PI
 
 fun main(args: Array<String>) {
-    println("${lcm(15,4)}")
+    sin(100 * PI, 1e-5)
 }
 
 /**
@@ -92,13 +95,13 @@ fun fib(n: Long): Long {
     var nm2: Long = 1
     var nm1: Long = 1
     var nn: Long = 0
-    if (n in 1..2) return 1 else {
+    return if (n in 1..2) 1 else {
         for (mem in 3..n) {
             nn = nm2 + nm1
             nm2 = nm1
             nm1 = nn
         }
-        return nn
+        nn
     }
 }
 
@@ -119,10 +122,10 @@ fun lcm(m: Int, n: Int): Int {
     }
 
     if (m > n) {
-        k = mink(n,m)
+        k = mink(n, m)
         step = n
     } else {
-        k = mink(m,n)
+        k = mink(m, n)
         step = m
     }
 
@@ -142,7 +145,7 @@ fun minDivisor(n: Int): Int {
     var del = 2
     while (del < n) {
         if (n % del == 0) break
-        del ++
+        del++
     }
     return del
 }
@@ -156,7 +159,7 @@ fun maxDivisor(n: Int): Int {
     var del: Int = n - 1
     while (del > 1) {
         if (n % del == 0) break
-        del --
+        del--
     }
     return del
 }
@@ -216,7 +219,20 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var xX: Int = x
+    var countX = 0
+    while (xX > 1) {
+        if ((xX % 2) == 0) {
+            xX /= 2
+            countX++
+        } else {
+            xX = 3 * xX + 1
+            countX++
+        }
+    }
+    return countX
+}
 
 /**
  * Средняя
@@ -225,7 +241,29 @@ fun collatzSteps(x: Int): Int = TODO()
  * sin(x) = x - x^3 / 3! + x^5 / 5! - x^7 / 7! + ...
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+
+fun sin(x: Double, eps: Double): Double {
+    // для знака "-" у каждого второго члена
+    var minus = 1.0
+    // очередной член
+    var curMem: Double
+    // сумма членов
+    var sumMem = 0.0
+    // для x > 2PI
+    var xX = x
+    while (xX > 2 * PI) xX -= 2 * PI
+    // иначе вычисляем очеердной член и сумму
+    for (deG in 1..(1/eps).toInt() step 2) {
+        curMem = xX.pow(deG) / factorial(deG) * minus
+        sumMem += curMem
+        minus *= -1
+        println("$deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
+        if (abs(curMem) < eps) break
+    }
+    return sumMem
+}
+
+
 
 /**
  * Средняя
