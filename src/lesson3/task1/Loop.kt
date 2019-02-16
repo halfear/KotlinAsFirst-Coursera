@@ -9,8 +9,8 @@ import kotlin.math.sqrt
 import kotlin.math.PI
 
 fun main(args: Array<String>) {
-    //sin(30 * PI, 1e-5)
-    println("${squareSequenceDigit(23)}")
+    //sin(5.218534463463045, 0.5924174389012276)
+    //println("${squareSequenceDigit(23)}")
     //squareSequenceDigit(23)
 }
 
@@ -265,12 +265,13 @@ fun sin(x: Double, eps: Double): Double {
         }
         else -> {
             while (xX > 2 * PI) xX -= 2 * PI
-            for (deG in 1..(1 / eps).toInt() step 2) {
+            for (deG in 1..100 step 2) { //степень 1..2..
                 curMem = xX.pow(deG) / factorial(deG) * minus
+                if (abs(curMem) < eps) break
                 sumMem += curMem
                 minus *= -1
                 //println("Не на осях: $xX, $deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
-                if (abs(curMem) < eps) break
+                //if (abs(curMem) < eps) break
             }
             return sumMem
         }

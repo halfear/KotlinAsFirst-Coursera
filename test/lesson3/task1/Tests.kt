@@ -184,6 +184,15 @@ class Tests {
         assertEquals(0.0, sin(8.0 * PI, 1e-5), 1e-5)
         assertEquals(0.866025, sin(PI / 3.0, 1e-5), 1e-5)
         assertEquals(0.0, sin(100 * PI, 1e-5), 1e-5)
+        assertEquals(-1.1762556073288168, sin(5.218534463463045, 0.5924174389012276), 1e-5)
+        /*
+        Test failed on input:
+  x -> 5.218534463463045, eps -> 0.5924174389012276
+Your output:
+  5.218534463463045
+Expected output:
+  -1.1762556073288168
+         */
     }
 
     @Test
