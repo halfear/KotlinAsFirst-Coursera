@@ -234,6 +234,16 @@ class Tests {
         assertEquals(6, squareSequenceDigit(12))
         assertEquals(0, squareSequenceDigit(17))
         assertEquals(9, squareSequenceDigit(27))
+        assertEquals(1, squareSequenceDigit(16))
+        assertEquals(0, squareSequenceDigit(17))
+        assertEquals(0, squareSequenceDigit(18))
+        assertEquals(1, squareSequenceDigit(19))
+        assertEquals(2, squareSequenceDigit(20))
+        assertEquals(1, squareSequenceDigit(21))
+        assertEquals(1, squareSequenceDigit(22))
+        assertEquals(4, squareSequenceDigit(23))
+        assertEquals(4, squareSequenceDigit(24))
+        assertEquals(1, squareSequenceDigit(25))
     }
 
     @Test

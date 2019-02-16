@@ -9,7 +9,9 @@ import kotlin.math.sqrt
 import kotlin.math.PI
 
 fun main(args: Array<String>) {
-    sin(30 * PI, 1e-5)
+    //sin(30 * PI, 1e-5)
+    println("${squareSequenceDigit(23)}")
+    //squareSequenceDigit(23)
 }
 
 /**
@@ -249,15 +251,15 @@ fun sin(x: Double, eps: Double): Double {
     var xX = x
     when {
         xX % PI == 0.0 -> {
-            println("$xX кратно PI, sin(x)=0.0")
+            //println("$xX кратно PI, sin(x)=0.0")
             return 0.0
         }
         (xX % (PI / 2) == 0.0) && (xX % (3 * PI / 2) != 0.0) -> {
-            println("$xX кратно PI/2, sin(x)=1.0")
+            //println("$xX кратно PI/2, sin(x)=1.0")
             return 1.0
         }
         xX % (3 * PI / 2) == 0.0 -> {
-            println("$xX кратно 3/2PI, sin(x)=-1.0")
+            //println("$xX кратно 3/2PI, sin(x)=-1.0")
             return -1.0
         }
         else -> {
@@ -266,7 +268,7 @@ fun sin(x: Double, eps: Double): Double {
                 curMem = xX.pow(deG) / factorial(deG) * minus
                 sumMem += curMem
                 minus *= -1
-                println("Не на осях: $xX, $deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
+                //println("Не на осях: $xX, $deG, $eps, $curMem, $sumMem, ${abs(curMem) < eps}")
                 if (abs(curMem) < eps) break
             }
             return sumMem
@@ -323,7 +325,31 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var countOfDigits = 0 //кол-во знаков
+    var count123 = 1 //счётчик 1..2..3..
+    var numBod = 0 //квадрат
+    val requiredDigit: Int
+    while (countOfDigits < n) { //искомая цифра должна входить в текущий квадрат
+        numBod = count123.toDouble().pow(2).toInt()
+        countOfDigits += digitNumber(numBod)
+        count123++
+        //println("$count123, $numBod, $countOfDigits")
+    }
+    requiredDigit = countOfDigits - n //искомая цифра в найденном квадрате с конца
+    //println("$requiredDigit, ${(10.0.pow(requiredDigit).toInt())}")
+    return when (requiredDigit) {
+        0 -> numBod % 10
+        else -> {
+            if ((numBod / (10.0.pow(requiredDigit).toInt())) >= 10) {
+                (numBod / (10.0.pow(requiredDigit).toInt())) % 10
+            } else {
+                (numBod / (10.0.pow(requiredDigit).toInt()))
+            }
+        }
+
+    }
+}
 
 /**
  * Сложная
