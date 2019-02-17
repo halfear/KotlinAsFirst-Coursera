@@ -245,7 +245,8 @@ fun collatzSteps(x: Int): Int {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 
-fun sin(x: Double, eps: Double): Double {
+fun sin(x: Double, eps: Double): Double = TODO()
+/*
     var minus = 1.0
     var curMem: Double
     var sumMem = 0.0
@@ -277,7 +278,7 @@ fun sin(x: Double, eps: Double): Double {
         }
     }
 }
-
+*/
 
 /**
  * Средняя
@@ -295,7 +296,32 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var nN = n
+    var new = 0
+    var lastDig: Int
+
+    while (nN > 0) {
+        lastDig = nN % 10
+        nN /= 10
+        new *= 10
+        new += lastDig
+    }
+    return new
+}
+
+/*
+n1 = int(input("Введите целое число: "))
+n2 = 0
+
+while n1 > 0:
+	digit = n1 % 10; # находим остаток - последнюю цифру числа
+	n1 = n1 // 10; # делим нацело - убираем из числа последнюю цифру
+	n2 = n2 * 10 # увеличиваем разрядность второго числа
+	n2 = n2 + digit # добавляем очередную цифру
+
+print('"Обратное" ему число:',n2)
+*/
 
 /**
  * Средняя
