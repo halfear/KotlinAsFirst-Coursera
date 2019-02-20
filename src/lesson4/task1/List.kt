@@ -195,6 +195,17 @@ fun polynom(p: List<Double>, x: Double): Double {
     return when {
         p.isEmpty() -> 0.0
         else -> {
+            val pol: List<Double> = p.map { it * x.pow(p.indexOf(it)) }
+            pol.sum()
+        }
+    }
+}
+// Сверху и снизу этой надписи - это одна и таже программа, только сверху использована функция фысшего порядка
+/*
+fun polynom(p: List<Double>, x: Double): Double {
+    return when {
+        p.isEmpty() -> 0.0
+        else -> {
             val pol = mutableListOf<Double>()
             for (i in 0 until p.size) {
                 val pelem = p[i]
@@ -204,6 +215,7 @@ fun polynom(p: List<Double>, x: Double): Double {
         }
     }
 }
+ */
 
 /**
  * Средняя
