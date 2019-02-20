@@ -5,6 +5,17 @@ package lesson4.task1
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
 
+fun main (args: Array<String>) {
+    val al = listOf(1.0, 2.0, 3.0, 4.0)
+    val bl = listOf(3.0, 5.0, 7.0, 9.0)
+    println("${al.size}")
+    val cl = mutableListOf<Double>()
+
+    cl.add(0,al[0] * bl[0])
+    println("$cl")
+}
+
+
 /**
  * Пример
  *
@@ -124,7 +135,7 @@ fun abs(v: List<Double>): Double = TODO()
  */
 fun mean(list: List<Double>): Double {
     return when {
-        list.size == 0 -> 0.0
+        list.isEmpty() -> 0.0
         else -> list.sum() / list.size
     }
 }
@@ -139,7 +150,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     return when {
-        list.size == 0 -> list
+        list.isEmpty() -> list
         else -> {
             val cenar = mean(list)
             for (i in 0 until list.size) {
@@ -158,7 +169,18 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.0.
  */
-fun times(a: List<Double>, b: List<Double>): Double = TODO()
+fun times(a: List<Double>, b: List<Double>): Double {
+    return when {
+        a.isEmpty() && b.isEmpty() -> 0.0
+        else -> {
+            val c = mutableListOf<Double>()
+            for (i in 0 until a.size) {
+                c.add(i,a[i] * b[i])
+            }
+            c.sum()
+        }
+    }
+}
 
 /**
  * Средняя
