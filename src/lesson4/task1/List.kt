@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun main (args: Array<String>) {
@@ -190,7 +191,19 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0.0 при любом x.
  */
-fun polynom(p: List<Double>, x: Double): Double = TODO()
+fun polynom(p: List<Double>, x: Double): Double {
+    return when {
+        p.isEmpty() -> 0.0
+        else -> {
+            val pol = mutableListOf<Double>()
+            for (i in 0 until p.size) {
+                val pelem = p[i]
+                pol.add(i,pelem * x.pow(i))
+            }
+            pol.sum()
+        }
+    }
+}
 
 /**
  * Средняя
