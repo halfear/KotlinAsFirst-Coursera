@@ -7,13 +7,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun main (args: Array<String>) {
-    val al = listOf(1.0, 2.0, 3.0, 4.0)
-    val bl = listOf(3.0, 5.0, 7.0, 9.0)
-    println("${al.size}")
-    val cl = mutableListOf<Double>()
-
-    cl.add(0,al[0] * bl[0])
-    println("$cl")
+    accumulate(mutableListOf(1.0, 2.0, 3.0, 4.0))
 }
 
 
@@ -200,7 +194,7 @@ fun polynom(p: List<Double>, x: Double): Double {
         }
     }
 }
-// Сверху и снизу этой надписи - это одна и таже программа, только сверху использована функция фысшего порядка
+
 /*
 fun polynom(p: List<Double>, x: Double): Double {
     return when {
@@ -227,7 +221,42 @@ fun polynom(p: List<Double>, x: Double): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()
+
+fun accumulate(list: MutableList<Double>): MutableList<Double> {
+    return when {
+        list.isEmpty() -> list
+        else -> {
+            val newlist = list.map { list.subList(0,list.indexOf(it)+1).sum() }
+            for (i in 0 until list.size) {
+                val elem = newlist[i]
+                list[i] = elem
+            }
+            list
+        }
+    }
+}
+
+
+/*
+fun accumulate(list: MutableList<Double>): MutableList<Double> {
+    return when {
+        list.isEmpty() -> list
+        else -> {
+            val newlist = mutableListOf<Double>()
+            for (i in 0 until list.size) {
+                val sublist = list.subList(0, i+1)
+                val sum = sublist.sum()
+                newlist.add(sum)
+            }
+            for (i in 0 until list.size) {
+                val elem = newlist[i]
+                list[i] = elem
+            }
+            list
+        }
+    }
+}
+*/
 
 /**
  * Средняя
