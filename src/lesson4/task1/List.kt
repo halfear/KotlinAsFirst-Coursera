@@ -7,10 +7,11 @@ import lesson3.task1.isPrime
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+/*
 fun main (args: Array<String>) {
     accumulate(mutableListOf(1.0, 2.0, 3.0, 4.0))
 }
-
+*/
 
 /**
  * Пример
@@ -170,9 +171,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
         a.isEmpty() && b.isEmpty() -> 0.0
         else -> {
             val c = mutableListOf<Double>()
-            for (i in 0 until a.size) {
-                c.add(i,a[i] * b[i])
-            }
+            for (i in 0 until a.size) c.add(i, a[i] * b[i])
             c.sum()
         }
     }
@@ -227,7 +226,7 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
     return when {
         list.isEmpty() -> list
         else -> {
-            val newlist = list.map { list.subList(0,list.indexOf(it)+1).sum() }
+            val newlist = list.map { list.subList(0, list.indexOf(it) + 1).sum() }
             for (i in 0 until list.size) {
                 val elem = newlist[i]
                 list[i] = elem
@@ -286,9 +285,9 @@ fun factorize(n: Int): List<Int> {
             }
         } else i++
     }
-    val fac = multiList.sorted()
-    //println("fac: $fac")
-    return fac
+    return multiList.sorted()
+    //println("Answer: ${multiList.sorted()}")
+
 }
 
 /**
@@ -307,7 +306,32 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+
+fun convert(n: Int, base: Int): List<Int> {
+    val grades = mutableListOf<Int>()
+    val result = mutableListOf<Int>()
+    var rem = n
+    var digitValue = 1
+    var power = 0
+
+    while (digitValue <= n) {
+        digitValue = ((base.toDouble()).pow(power)).toInt()
+        if (digitValue > n) break
+        grades.add(digitValue)
+        power++
+        //println("grades: $grades")
+    }
+
+    for (elNum in grades.size - 1 downTo 0) {
+        val elem = grades[elNum]
+        val gradeValueInNumber = rem / elem
+        rem -= gradeValueInNumber * elem
+        result.add(gradeValueInNumber)
+        //println("result: $result")
+    }
+    return result
+}
+
 
 /**
  * Сложная
