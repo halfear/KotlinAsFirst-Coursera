@@ -7,11 +7,13 @@ import lesson3.task1.isPrime
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-/*
+
 fun main (args: Array<String>) {
-    accumulate(mutableListOf(1.0, 2.0, 3.0, 4.0))
+    //accumulate(mutableListOf(1.0, 2.0, 3.0, 4.0))
+    println("${Int.MAX_VALUE}")
+    println("${convert(Int.MAX_VALUE, 11)}")
 }
-*/
+
 
 /**
  * Пример
@@ -310,14 +312,14 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
 fun convert(n: Int, base: Int): List<Int> {
     val grades = mutableListOf<Int>()
     val result = mutableListOf<Int>()
-    var rem = n
-    var digitValue = 1
+    var rem: Long = n.toLong()
+    var digitValue: Long = 1
     var power = 0
 
     while (digitValue <= n) {
-        digitValue = ((base.toDouble()).pow(power)).toInt()
+        digitValue = ((base.toDouble()).pow(power)).toLong()
         if (digitValue > n) break
-        grades.add(digitValue)
+        grades.add(digitValue.toInt())
         power++
         //println("grades: $grades")
     }
@@ -326,7 +328,7 @@ fun convert(n: Int, base: Int): List<Int> {
         val elem = grades[elNum]
         val gradeValueInNumber = rem / elem
         rem -= gradeValueInNumber * elem
-        result.add(gradeValueInNumber)
+        result.add(gradeValueInNumber.toInt())
         //println("result: $result")
     }
     return result
@@ -341,7 +343,14 @@ fun convert(n: Int, base: Int): List<Int> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val letters = "0123456789abcdefghijklmnopqrstuvwxyz"
+    //println("$letters")
+    //println("${letters[10]}")
+    val convList = convert(n, base)
+    //println("$convList")
+    return convList.joinToString(separator = "", transform = { "${letters[it]}" })
+}
 
 /**
  * Средняя
