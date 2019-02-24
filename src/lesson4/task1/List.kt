@@ -419,3 +419,13 @@ fun roman(n: Int): String = TODO()
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 fun russian(n: Int): String = TODO()
+/*
+    var rest = n
+    val revertDigitsOfN = mutableListOf<Int>()
+
+    while (rest > 0) {
+        revertDigitsOfN.add(rest % 10)
+        rest /= 10
+    }
+}
+*/
