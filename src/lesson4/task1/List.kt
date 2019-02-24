@@ -389,7 +389,17 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val letters = "0123456789abcdefghijklmnopqrstuvwxyz"
+    val digitsOnlyList = mutableListOf<Int>()
+
+    for (i in 0 until str.length) {
+        val strElem = str[i]
+        digitsOnlyList.add(letters.indexOf(strElem))
+    }
+
+    return decimal(digitsOnlyList, base)
+}
 
 /**
  * Сложная
