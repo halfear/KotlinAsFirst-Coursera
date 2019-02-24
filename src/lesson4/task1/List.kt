@@ -187,6 +187,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0.0 при любом x.
  */
+/*
 fun polynom(p: List<Double>, x: Double): Double {
     return when {
         p.isEmpty() -> 0.0
@@ -196,8 +197,8 @@ fun polynom(p: List<Double>, x: Double): Double {
         }
     }
 }
+*/
 
-/*
 fun polynom(p: List<Double>, x: Double): Double {
     return when {
         p.isEmpty() -> 0.0
@@ -211,7 +212,7 @@ fun polynom(p: List<Double>, x: Double): Double {
         }
     }
 }
- */
+
 
 /**
  * Средняя
@@ -224,6 +225,7 @@ fun polynom(p: List<Double>, x: Double): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 
+/*
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     return when {
         list.isEmpty() -> list
@@ -237,16 +239,16 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
         }
     }
 }
+*/
 
 
-/*
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     return when {
         list.isEmpty() -> list
         else -> {
             val newlist = mutableListOf<Double>()
             for (i in 0 until list.size) {
-                val sublist = list.subList(0, i+1)
+                val sublist = list.subList(0, i + 1)
                 val sum = sublist.sum()
                 newlist.add(sum)
             }
@@ -258,7 +260,7 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
         }
     }
 }
-*/
+
 
 /**
  * Средняя
@@ -316,22 +318,24 @@ fun convert(n: Int, base: Int): List<Int> {
     var digitValue: Long = 1
     var power = 0
 
-    while (digitValue <= n) {
-        digitValue = ((base.toDouble()).pow(power)).toLong()
-        if (digitValue > n) break
-        grades.add(digitValue.toInt())
-        power++
-        //println("grades: $grades")
-    }
+    if (n == 0) return listOf(0) else {
+        while (digitValue <= n) {
+            digitValue = ((base.toDouble()).pow(power)).toLong()
+            if (digitValue > n) break
+            grades.add(digitValue.toInt())
+            power++
+            //println("grades: $grades")
+        }
 
-    for (elNum in grades.size - 1 downTo 0) {
-        val elem = grades[elNum]
-        val gradeValueInNumber = rem / elem
-        rem -= gradeValueInNumber * elem
-        result.add(gradeValueInNumber.toInt())
-        //println("result: $result")
+        for (elNum in grades.size - 1 downTo 0) {
+            val elem = grades[elNum]
+            val gradeValueInNumber = rem / elem
+            rem -= gradeValueInNumber * elem
+            result.add(gradeValueInNumber.toInt())
+            //println("result: $result")
+        }
+        return result
     }
-    return result
 }
 
 
@@ -359,7 +363,22 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    val xBaseList = mutableListOf<Int>()
+    val decList = mutableListOf<Int>()
+
+    for (i in digits.size - 1 downTo 0) {
+        val digitValue = ((base.toDouble()).pow(i)).toInt()
+        xBaseList.add(digitValue)
+    }
+
+    for (i in 0 until xBaseList.size) {
+        val xBaseElem = xBaseList[i]
+        val knownElem = digits[i]
+        decList.add(xBaseElem * knownElem)
+    }
+    return decList.sum()
+}
 
 /**
  * Сложная
