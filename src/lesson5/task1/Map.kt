@@ -106,7 +106,29 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    //println("$grades")
+    val marks = mutableListOf<Int>()
+    val namesToMarks = mutableMapOf<Int, MutableList<String>>()
+    var listOfNames = mutableListOf<String>()
+
+    for ((_, mark) in grades) {
+        if (mark !in marks) marks.add(mark)
+    }
+    val marksSorted = marks.sortedDescending()
+    //println("$marksSorted")
+
+    for (item in marksSorted) {
+        for ((name, mark) in grades) {
+            if (mark == item) listOfNames.add(name)
+            //println("$listOfNames")
+        }
+        namesToMarks[item] = listOfNames
+        listOfNames = mutableListOf()
+    }
+    //println("$namesToMarks")
+    return namesToMarks
+}
 
 /**
  * Простая
