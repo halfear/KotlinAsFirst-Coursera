@@ -178,7 +178,26 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val namesOnly = mutableListOf<String>()
+    var pricesOfAct = mutableListOf<Double>()
+    val aver = mutableMapOf<String, Double>()
+
+    for ((name, _) in stockPrices) {
+        if (name !in namesOnly) namesOnly.add(name)
+    }
+    //println("$namesOnly")
+
+    for (i in namesOnly) {
+        for ((name, price) in stockPrices) {
+            if (name == i) pricesOfAct.add(price)
+        }
+        aver[i] = pricesOfAct.sum() / pricesOfAct.size
+        pricesOfAct = mutableListOf()
+    }
+    //println("$aver")
+    return aver.toMap()
+}
 
 /**
  * Средняя
