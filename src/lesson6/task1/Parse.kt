@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import lesson2.task2.daysInMonth
+
 /**
  * Пример
  *
@@ -71,7 +73,41 @@ fun main(args: Array<String>) {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val source = str.split(" ")
+    println("$source")
+
+    if (source.size != 3) return "" else {
+        val result = mutableListOf<String>("00", "00", "00")
+
+        if (source[2].toInt() >= 0) {
+            result[2] = source[2]
+        } else return ""
+
+        when (source[1]) {
+            "января" -> result[1] = "01"
+            "февраля" -> result[1] = "02"
+            "марта" -> result[1] = "03"
+            "апреля" -> result[1] = "04"
+            "мая" -> result[1] = "05"
+            "июня" -> result[1] = "06"
+            "июля" -> result[1] = "07"
+            "августа" -> result[1] = "08"
+            "сентября" -> result[1] = "09"
+            "октября" -> result[1] = "10"
+            "ноября" -> result[1] = "11"
+            "декабря" -> result[1] = "12"
+            else -> return ""
+        }
+
+        if (source[0].toInt() in 1..daysInMonth(result[1].toInt(), result[2].toInt())) {
+            result[0] = source[0]
+        } else return ""
+
+        return String.format("%02d.%02d.%04d", result[0].toInt(), result[1].toInt(), result[2].toInt())
+    }
+}
+
 
 /**
  * Средняя
