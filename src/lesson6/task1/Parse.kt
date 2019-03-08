@@ -51,12 +51,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -75,7 +73,7 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val source = str.split(" ")
-    println("$source")
+    //println("$source")
 
     if (source.size != 3) return "" else {
         val result = mutableListOf<String>("00", "00", "00")
@@ -119,7 +117,44 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val source = digital.split(".")
+    val result = mutableListOf("00", "00", "00")
+    //println("$source")
+
+    try {
+        if (source.size != 3) return "" else {
+
+            if (source[2].toInt() < 0) return "" else {
+                result[2] = String.format("%04d", source[2].toInt())
+            }
+
+            when (source[1]) {
+                "01" -> result[1] = "января"
+                "02" -> result[1] = "февраля"
+                "03" -> result[1] = "марта"
+                "04" -> result[1] = "апреля"
+                "05" -> result[1] = "мая"
+                "06" -> result[1] = "июня"
+                "07" -> result[1] = "июля"
+                "08" -> result[1] = "августа"
+                "09" -> result[1] = "сентября"
+                "10" -> result[1] = "октября"
+                "11" -> result[1] = "ноября"
+                "12" -> result[1] = "декабря"
+                else -> return ""
+            }
+
+            if (source[0].toInt() in 1..daysInMonth(source[1].toInt(), source[2].toInt())) {
+                result[0] = String.format("%d", source[0].toInt())
+            } else return ""
+        }
+        //println("$result")
+        return result.joinToString(separator = " ")
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+}
 
 /**
  * Средняя
