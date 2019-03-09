@@ -170,29 +170,31 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     //println(phone)
-    val result = mutableListOf<Char>()
-    val valid = setOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '(', ')', ' ')
-    val nonNums = setOf('-', '(', ')', ' ')
-    var phoneWOPlus = mutableListOf<Char>()
+    if (phone == "") return "" else {
+        val result = mutableListOf<Char>()
+        val valid = setOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '(', ')', ' ')
+        val nonNums = setOf('-', '(', ')', ' ')
+        var phoneWOPlus = mutableListOf<Char>()
 
-    if (phone.first() == '+') {
-        result.add(phone.first())
-        for (i in 1 until phone.length) {
-            phoneWOPlus.add(phone[i])
+        if (phone.first() == '+') {
+            result.add(phone.first())
+            for (i in 1 until phone.length) {
+                phoneWOPlus.add(phone[i])
+            }
+        } else phoneWOPlus = phone.map { it }.toMutableList()
+        //println("$result")
+        //println("$phoneWOPlus")
+
+        for (char in phoneWOPlus) {
+            //println("$char")
+            if (char in valid) {
+                result.add(char)
+                //println("$result")
+            } else return ""
         }
-    } else phoneWOPlus = phone.map { it }.toMutableList()
-    //println("$result")
-    //println("$phoneWOPlus")
 
-    for (char in phoneWOPlus) {
-        //println("$char")
-        if (char in valid) {
-            result.add(char)
-            //println("$result")
-        } else return ""
+        return result.filter { it !in nonNums }.joinToString(separator = "")
     }
-
-    return result.filter { it !in nonNums }.joinToString(separator = "")
 }
 
 /**
@@ -205,7 +207,30 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val valid = setOf(' ', '-', '%', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    val ints = mutableListOf<Int>()
+    //println(jumps)
+
+    for (char in jumps) if (char !in valid) return -1
+
+    val list = jumps.split(" ")
+    //println(list)
+    //println("${list.size}")
+
+    for (elem in list) {
+        try {
+            val eI = elem.toInt()
+            ints.add(eI)
+            //println("$ints")
+        } catch (e: NumberFormatException) {
+            continue
+        }
+    }
+
+    val result = ints.max()
+    return result ?: -1
+}
 
 /**
  * Сложная
