@@ -168,7 +168,32 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    //println(phone)
+    val result = mutableListOf<Char>()
+    val valid = setOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '(', ')', ' ')
+    val nonNums = setOf('-', '(', ')', ' ')
+    var phoneWOPlus = mutableListOf<Char>()
+
+    if (phone.first() == '+') {
+        result.add(phone.first())
+        for (i in 1 until phone.length) {
+            phoneWOPlus.add(phone[i])
+        }
+    } else phoneWOPlus = phone.map { it }.toMutableList()
+    //println("$result")
+    //println("$phoneWOPlus")
+
+    for (char in phoneWOPlus) {
+        //println("$char")
+        if (char in valid) {
+            result.add(char)
+            //println("$result")
+        } else return ""
+    }
+
+    return result.filter { it !in nonNums }.joinToString(separator = "")
+}
 
 /**
  * Средняя
