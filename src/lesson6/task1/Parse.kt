@@ -193,7 +193,9 @@ fun flattenPhoneNumber(phone: String): String {
             } else return ""
         }
 
-        return result.filter { it !in nonNums }.joinToString(separator = "")
+        val phoneRes = result.filter { it !in nonNums }.joinToString(separator = "")
+
+        return if (phoneRes == "+") "" else phoneRes
     }
 }
 
