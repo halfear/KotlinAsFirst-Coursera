@@ -267,6 +267,7 @@ fun bestHighJump(jumps: String): Int {
     if (ints.size != oneZero.size) return -1
 
     val result = ints.map { it * oneZero[ints.indexOf(it)] }
+    if (result.sum() == 0) return -1
 
     val max = result.max()
     return max ?: -1
