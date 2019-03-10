@@ -242,7 +242,33 @@ fun bestLongJump(jumps: String): Int {
  * Прочитать строку и вернуть максимальную взятую высоту (230 в примере).
  * При нарушении формата входной строки вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+
+fun bestHighJump(jumps: String): Int {
+    val valid = setOf(' ', '-', '+', '%', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    val ints = mutableListOf<Int>()
+    val oneZero = mutableListOf<Int>()
+
+    for (char in jumps) if (char !in valid) return -1
+
+    val list = jumps.split(" ")
+
+    for (elem in list) {
+        try {
+            val el = elem.toInt()
+            ints.add(el)
+        } catch (e: NumberFormatException) {
+            val el = listOf(elem)
+            if ("+" in el) oneZero.add(1) else oneZero.add(0)
+        }
+    }
+
+    if (ints.size != oneZero.size) return -1
+
+    val result = ints.map { it * oneZero[ints.indexOf(it)] }
+
+    val max = result.max()
+    return max ?: -1
+}
 
 /**
  * Сложная
