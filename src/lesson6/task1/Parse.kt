@@ -247,7 +247,8 @@ fun bestHighJump(jumps: String): Int {
     val valid = setOf(' ', '-', '+', '%', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
     val ints = mutableListOf<Int>()
     val oneZero = mutableListOf<Int>()
-    //println(jumps)
+    val result = mutableListOf<Int>()
+    println(jumps)
 
     for (char in jumps) if (char !in valid) return -1
 
@@ -259,7 +260,6 @@ fun bestHighJump(jumps: String): Int {
             ints.add(el)
         } catch (e: NumberFormatException) {
             val el = listOf(elem).toString()
-            //println(elem)
             if ('+' in el) oneZero.add(1) else oneZero.add(0)
         }
     }
@@ -267,7 +267,15 @@ fun bestHighJump(jumps: String): Int {
     if (ints.size != oneZero.size) return -1
     if (oneZero.sum() == 0) return -1
 
-    val result = ints.map { it * oneZero[ints.indexOf(it)] }
+    println(ints)
+    println(oneZero)
+
+    //val result = ints.map { it * oneZero[ints.indexOf(it)] }
+    for (i in 0 until ints.size) {
+        result.add(ints[i] * oneZero[i])
+    }
+
+    println(result)
 
     val max = result.max()
     return max ?: -1
