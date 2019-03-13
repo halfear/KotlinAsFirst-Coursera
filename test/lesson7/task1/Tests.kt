@@ -62,6 +62,8 @@ Basic, Ruby, Swift.
                 countSubstrings("input/substrings_in1.txt", listOf("РАЗНЫЕ", "ные", "Неряшливость", "е", "эволюция")))
         assertEquals(mapOf("Карминовый" to 2, "Некрасивый" to 2, "белоглазый" to 1),
                 countSubstrings("input/substrings_in1.txt", listOf("Карминовый", "Некрасивый", "белоглазый")))
+        assertEquals(mapOf("ее" to 4, "вести" to 2),
+                countSubstrings("input/substrings_in1.txt", listOf("ее", "вести")))
     }
 
     @Test
