@@ -82,7 +82,39 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+
+    for (line in File(inputName).readLines()) {
+        if (line.length < 2) {
+            writer.write(line)
+            writer.newLine()
+        } else {
+            if (!line.contains(Regex("""[ыЫюЮяЯ]"""))) {
+                writer.write(line)
+                writer.newLine()
+            } else {
+                val fixedLine = mutableListOf<Char>()
+                fixedLine.add(line[0])
+                for (i in 1 until line.length) {
+                    if (!line[i].toString().contains(Regex("""[ыЫюЮяЯ]"""))) fixedLine.add(line[i]) else {
+                        if (line[i - 1].toString().contains(Regex("""[жЖшШчЧщЩ]"""))) {
+                            when (line[i]) {
+                                'ы' -> fixedLine.add('и')
+                                'Ы' -> fixedLine.add('И')
+                                'ю' -> fixedLine.add('у')
+                                'Ю' -> fixedLine.add('У')
+                                'я' -> fixedLine.add('а')
+                                'Я' -> fixedLine.add('А')
+                            }
+                        } else fixedLine.add(line[i])
+                    }
+                }
+                writer.write(fixedLine.joinToString(separator = ""))
+                writer.newLine()
+            }
+        }
+    }
+    writer.close()
 }
 
 /**
